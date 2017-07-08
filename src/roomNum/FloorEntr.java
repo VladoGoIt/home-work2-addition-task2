@@ -8,19 +8,29 @@ import java.util.Scanner;
 public class FloorEntr {
     public static void main(String args[]) {
         double room = 1;
+        int q = 36;
         Scanner in = new Scanner(System.in);
 
-        System.out.println("Введіть номер квартири");
+        while(true)
+        {
+            try {
+                System.out.println("Введіть номер квартири");;
+                room = in.nextInt();
+                in.nextLine();
+                break;
+            } catch (Exception e){
+                System.out.println("Введено не номер!");
+                in.nextLine();
+            }
+        }
 
-        room = in.nextInt();
-        in.nextLine();
-        if (room > 144) {
-            System.out.println("В будинку немає такої квартири");
+        if (room > 144 || room <= 0) {
+            System.out.println("В будинку немає такої квартири!");
         } else {
-            double ent = Math.ceil(room / 36);
+            double ent = Math.ceil(room / q);
             int entrance = (int) ent;
 
-            int floor = (int) Math.ceil(room / entrance / 4);
+            int floor = (int) Math.ceil((room - (q * (entrance - 1))) / 4);
             System.out.println(floor + " - поверх");
             System.out.println(entrance + " - підїзд");
         }
